@@ -23,7 +23,6 @@ class ChordTrainer {
                     "Ab": ["Ab", "C", "Eb"],
                     "Db": ["Db", "F", "Ab"],
                     "Gb": ["Gb", "Bb", "Db"],
-                    "Cb": ["Cb", "Eb", "Gb"],
                     "g": ["G", "Bb", "D"],
                     "c": ["C", "Eb", "G"],
                     "f": ["F", "Ab", "C"],
@@ -69,9 +68,16 @@ class ChordTrainer {
                 commonElements.length >= 1 &&
                 this.getKeyOfChord(chord).toLowerCase() !== key.toLowerCase()
             ) {
-                matchingChords[key] = commonElements.length;
+                let weight
+                if (commonElements.length === 2) {
+                    weight = 15
+                } else {
+                    weight = 1
+                }
+                matchingChords[key] = weight;
             }
         }
+        console.log(matchingChords)
         return matchingChords;
     }
 
@@ -79,16 +85,22 @@ class ChordTrainer {
         const matchingChords = this.matchChords(chord);
         const keys = Object.keys(matchingChords);
         const weights = Object.values(matchingChords);
-        const totalWeight = weights.reduce((a, b) => a + b, 0);
-        const randomWeight = Math.random() * totalWeight;
+        return this.weighted_random(keys, weights)
+    }
 
-        let weightSum = 0;
-        for (let i = 0; i < keys.length; i++) {
-            weightSum += weights[i];
-            if (randomWeight <= weightSum) {
-                return keys[i];
-            }
-        }
+    weighted_random(items, weights) {
+        var i;
+
+        for (i = 1; i < weights.length; i++)
+            weights[i] += weights[i - 1];
+
+        var random = Math.random() * weights[weights.length - 1];
+
+        for (i = 0; i < weights.length; i++)
+            if (weights[i] > random)
+                break;
+
+        return items[i];
     }
 
     getRandomKeyContainingKeyFromKey(key) {
