@@ -68,6 +68,7 @@ class ChordTrainer {
                 commonElements.length >= 1 &&
                 this.getKeyOfChord(chord).toLowerCase() !== key.toLowerCase()
             ) {
+                console.log(commonElements)
                 let weight
                 if (commonElements.length === 2) {
                     weight = 20
@@ -82,6 +83,7 @@ class ChordTrainer {
     }
 
     getRandomKeyContainingKey(chord) {
+        console.log("we have chord " + chord)
         const matchingChords = this.matchChords(chord);
         const keys = Object.keys(matchingChords);
         const weights = Object.values(matchingChords);
