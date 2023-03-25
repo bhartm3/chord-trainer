@@ -18,6 +18,12 @@
 <div class="container">
     <div class="row">
         <div class="col">
+        Spiele den Dreiklang der Tonart. Der folgende Dreiklang wird rechts angezeigt und verschiebt sich nach dem Intervall nach links.
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
             <ul class="list-group">
                 <li class="list-group-item">Tonart</li>
                 <li class="list-group-item"><p id="current">current</p></li>
@@ -35,9 +41,15 @@
 </div>
 <div class="container">
     <div class="row">
+        <div class="column">
+            <p>Nächster Dreiklang in </p>
+            <p id="countdown">8</p>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <input type="range" id="intervalInput" min="1000" max="20000" value="5000" step="1000">
-            <p>Nächster Dreiklang nach Sekunden: <span id="sliderValue">5</span></p>
+            <input type="range" id="intervalInput" min="1000" max="20000" value="8000" step="1000">
+            <p>Nächster Dreiklang nach Sekunden: <span id="sliderValue">8</span></p>
             <script>
                 // Get a reference to the slider element and the value display element
                 var slider = document.getElementById("intervalInput");
@@ -48,7 +60,7 @@
                     sliderValue.innerHTML = slider.value/1000;
                 });
             </script>
-            <button class="btn btn-primary" id="setInterval">Set Interval</button>
+            <button class="btn btn-primary" id="setInterval">Start/Reset</button>
 
         </div>
     </div>

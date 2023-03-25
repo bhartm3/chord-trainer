@@ -113,7 +113,7 @@ class ChordTrainer {
 
 const p = new ChordTrainer();
 lastKey = p.getRandomBaseKey()
-timeout = 5000
+timeout = 8000
 
 let current = document.getElementById("current");
 let currentNotes = document.getElementById("currentnotes");
@@ -130,13 +130,30 @@ function updateFields() {
 }
 
 id = null;
-
+countdownId = null;
 function setTimeout() {
     clearInterval(id);
+    clearInterval(countdownId);
     updateFields();
     timeout = document.getElementById("intervalInput").value
     id = setInterval(updateFields, timeout)
+
+    let countdownDisplay = document.getElementById("countdown");
+    let countdownValue = timeout/1000;
+
+    countdownId = setInterval(function() {
+        countdownValue--;
+        countdownDisplay.innerHTML = countdownValue;
+        if (countdownValue === 0) {
+            countdownValue = timeout/1000;
+        }
+    }, 1000);
+
+
 }
 
 var button = document.getElementById("setInterval");
 button.addEventListener("click", setTimeout);
+
+
+
