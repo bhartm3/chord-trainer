@@ -70,7 +70,7 @@ class ChordTrainer {
             ) {
                 let weight
                 if (commonElements.length === 2) {
-                    weight = 15
+                    weight = 20
                 } else {
                     weight = 1
                 }
